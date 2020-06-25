@@ -1,0 +1,7 @@
+#Thu Jun 25 13:20:10 CAT 2020
+base.0=E\:\\Katherine Chambers\\Documents\\_College\\VarsityCollege3rdYear\\XBCAD7319\\games\\UnjumbleGameDemo\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
+path.1=classes.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=E\:\\Katherine Chambers\\Documents\\_College\\VarsityCollege3rdYear\\XBCAD7319\\games\\UnjumbleGameDemo\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
