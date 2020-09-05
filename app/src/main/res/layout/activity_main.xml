@@ -76,6 +76,7 @@
             android:elevation="10dp"
             android:fontFamily="@font/abeezee"
             android:text="a"
+            android:textAllCaps="false"
             android:textSize="24sp" />
 
         <Button
@@ -87,6 +88,7 @@
             android:elevation="10dp"
             android:fontFamily="@font/abeezee"
             android:text="kind"
+            android:textAllCaps="false"
             android:textSize="24sp" />
 
     </LinearLayout>
@@ -107,6 +109,7 @@
             android:elevation="10dp"
             android:fontFamily="@font/abeezee"
             android:text="she"
+            android:textAllCaps="false"
             android:textSize="24sp" />
 
         <Button
@@ -118,6 +121,7 @@
             android:elevation="10dp"
             android:fontFamily="@font/abeezee"
             android:text="is"
+            android:textAllCaps="false"
             android:textSize="24sp" />
 
     </LinearLayout>
@@ -137,6 +141,7 @@
             android:elevation="10dp"
             android:fontFamily="@font/abeezee"
             android:text="girl"
+            android:textAllCaps="false"
             android:textSize="24sp" />
 
         <Button
@@ -148,6 +153,7 @@
             android:elevation="10dp"
             android:fontFamily="@font/abeezee"
             android:text="6"
+            android:textAllCaps="false"
             android:textSize="24sp" />
     </LinearLayout>
 
