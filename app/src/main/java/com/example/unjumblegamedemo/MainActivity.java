@@ -257,6 +257,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    boolean clicked1=false;
+    boolean clicked2=false;
+    boolean clicked3=false;
+    boolean clicked4=false;
+    boolean clicked5=false;
+    boolean clicked6=false;
+
     @Override
     public void onClick(View v) {   //handles the click events for all the buttons
 
@@ -266,6 +273,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btn4 = findViewById(R.id.button4);
         Button btn5 = findViewById(R.id.button5);
         Button btn6 = findViewById(R.id.button6);
+        Button btn7 = findViewById(R.id.button7);
+        Button btn8 = findViewById(R.id.button8);
+
+
 
 
         TextView textView1 = findViewById(R.id.textView);
@@ -275,6 +286,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 userAnswer = userAnswer + " " + btn.getText().toString();
                 textView1.setText(userAnswer);
+
+                clicked1=true;
                 break;
 
             case R.id.button2:
@@ -283,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 userAnswer = userAnswer + " " + btn2.getText().toString();
                 textView1.setText(userAnswer);
 
-
+                clicked2=true;
                 break;
 
             case R.id.button3:
@@ -291,6 +304,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 userAnswer = userAnswer + " " + btn3.getText().toString();
                 textView1.setText(userAnswer);
+
+                clicked3=true;
                 break;
 
             case R.id.button4:
@@ -298,6 +313,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 userAnswer = userAnswer + " " + btn4.getText().toString();
                 textView1.setText(userAnswer);
+
+                clicked4=true;
                 break;
 
             case R.id.button5:
@@ -306,6 +323,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 userAnswer = userAnswer + " " + btn5.getText().toString();
                 textView1.setText(userAnswer);
+
+                clicked5=true;
                 break;
 
             case R.id.button6:
@@ -314,18 +333,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 userAnswer = userAnswer + " " + btn6.getText().toString();
                 textView1.setText(userAnswer);
+
+                clicked6=true;
                 break;
 
 
             case R.id.button7:
 
                 if (userAnswer.contains(correctAnswer)) { //handles event when the user gives correct answer
-                    Toast.makeText(this, "Level Complete! Try this next Level", Toast.LENGTH_SHORT).show();
                     testNumber = testNumber + 1;
 
                     if (testNumber > 12) {
                         Toast.makeText(this, "All Levels Complete! Congratulations!", Toast.LENGTH_SHORT).show();
+                        btn8.setEnabled(false);
+                        btn7.setEnabled(false);
                     } else {
+                        Toast.makeText(this, "Level Complete! Try this next Level", Toast.LENGTH_SHORT).show();
                         shuffle();
 
                         btn.setEnabled(true);
@@ -335,35 +358,75 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         btn5.setEnabled(true);
                         btn6.setEnabled(true);
 
+                        clicked1=false;
+                        clicked2=false;
+                        clicked3=false;
+                        clicked4=false;
+                        clicked5=false;
+                        clicked6=false;
+
                         userAnswer = "";
                         textView1.setText(userAnswer);
                     }
 
 
                 } else {                                   //handles event when the user gives incorrect answer
-                    Toast.makeText(this, "Incorrect. Use all available words or click RESTART to try again", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Incorrect. Use all available words or click RESTART to try this level again", Toast.LENGTH_SHORT).show();
+                    if(testNumber<=3){
+                        if(!clicked1 || !clicked2 || !clicked3){
+                            Toast.makeText(this, "Incorrect answer! Use all available words before using the submit button!", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(this, "Incorrect answer! Click RESTART to try this level again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else if(testNumber<=6){
+                        if(!clicked1 || !clicked2 || !clicked3 || !clicked4){
+                            Toast.makeText(this, "Incorrect answer! Use all available words before using the submit button!", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(this, "Incorrect answer! Click RESTART to try this level again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else if(testNumber<=9){
+                        if(!clicked1 || !clicked2 || !clicked3 || !clicked4 || !clicked5){
+                            Toast.makeText(this, "Incorrect answer! Use all available words before using the submit button!", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(this, "Incorrect answer! Click RESTART to try this level again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        if(!clicked1 || !clicked2 || !clicked3 || !clicked4 || !clicked5 || !clicked6){
+                            Toast.makeText(this, "Incorrect answer! Use all available words before using the submit button!", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(this, "Incorrect answer! Click RESTART to try this level again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }
                 break;
 
             case R.id.button8:
-                Toast.makeText(this, "Game Restarted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Level Restarted", Toast.LENGTH_SHORT).show();
                 userAnswer = "";
                 textView1.setText(userAnswer);
 
                 btn.setEnabled(true);
-
                 btn2.setEnabled(true);
-
                 btn3.setEnabled(true);
-
                 btn4.setEnabled(true);
-
                 btn5.setEnabled(true);
-
                 btn6.setEnabled(true);
 
-                shuffle();
+                clicked1=false;
+                clicked2=false;
+                clicked3=false;
+                clicked4=false;
+                clicked5=false;
+                clicked6=false;
 
+                shuffle();
                 break;
         }
     }
