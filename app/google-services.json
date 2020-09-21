@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "437264036957",
+    "firebase_url": "https://unjumblegamedemo.firebaseio.com",
+    "project_id": "unjumblegamedemo",
+    "storage_bucket": "unjumblegamedemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437264036957:android:b0c1022b9cec1ccc5809b4",
+        "android_client_info": {
+          "package_name": "com.example.unjumblegamedemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437264036957-1584jqv5vhe4q38fppa3d2vk3l7d20e4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.unjumblegamedemo",
+            "certificate_hash": "180a31a30a573ac25271bb4777d43b3a0667d72f"
+          }
+        },
+        {
+          "client_id": "437264036957-ahcjurda6o605pogmalh41i2ihmrekei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBottRiSZjxCj5BcAgYuxN5K3q_0bPypb0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437264036957-ahcjurda6o605pogmalh41i2ihmrekei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

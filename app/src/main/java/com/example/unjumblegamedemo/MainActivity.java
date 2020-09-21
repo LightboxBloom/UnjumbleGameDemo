@@ -1,67 +1,333 @@
+
+
 package com.example.unjumblegamedemo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.solver.widgets.Snapshot;
 
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Arrays;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String correctAnswer1 = "The dog barks";    //Users answer will be compared to this string
 
-    String correctAnswer2 = "The cat meows";    //Users answer will be compared to this string
+    String word1;
 
-    String correctAnswer3 = "He was happy";    //Users answer will be compared to this string
+    String word2;
 
-    String correctAnswer4 = "She kicked a ball";    //Users answer will be compared to this string
+    String word3;
 
-    String correctAnswer5 = "The leaves are green";    //Users answer will be compared to this string
+    String word4;
 
-    String correctAnswer6 = "An elephant was walking";    //Users answer will be compared to this string
+    String word5;
 
-    String correctAnswer7 = "She is a kind girl";    //Users answer will be compared to this string
+    String word6;
 
-    String correctAnswer8 = "He saw a big cow";    //Users answer will be compared to this string
-
-    String correctAnswer9 = "The fat cat ate fish";    //Users answer will be compared to this string
-
-    String correctAnswer10 = "The small cat was being chased";    //Users answer will be compared to this string
-
-    String correctAnswer11 = "He was carrying a big bag";    //Users answer will be compared to this string
-
-    String correctAnswer12 = "She was reading an interesting book";    //Users answer will be compared to this string
-
-    String correctAnswer = correctAnswer1;
+    String correctAnswer;
 
     String userAnswer = "";
 
     int testNumber = 1;
 
-    String[] sentence1 = {"The", "dog", "barks"};
-    String[] sentence2 = {"The", "cat", "meows"};
-    String[] sentence3 = {"He", "was", "happy"};
-    String[] sentence4 = {"She", "kicked", "a", "ball"};
-    String[] sentence5 = {"The", "leaves", "are", "green"};
-    String[] sentence6 = {"An", "elephant", "was", "walking"};
-    String[] sentence7 = {"She", "is", "a", "kind", "girl"};
-    String[] sentence8 = {"He", "saw", "a", "big", "cow"};
-    String[] sentence9 = {"The", "fat", "cat", "ate", "fish"};
-    String[] sentence10 = {"The", "small", "cat", "was", "being", "chased"};
-    String[] sentence11 = {"He", "was", "carrying", "a", "big", "bag"};
-    String[] sentence12 = {"She", "was", "reading", "an", "interesting", "book"};
+    List<String> sentence1 = new ArrayList<>();
+    List<String> sentence2 = new ArrayList<>();
+    List<String> sentence3 = new ArrayList<>();
+    List<String> sentence4 = new ArrayList<>();
+    List<String> sentence5 = new ArrayList<>();
+    List<String> sentence6 = new ArrayList<>();
+    List<String> sentence7 = new ArrayList<>();
+    List<String> sentence8 = new ArrayList<>();
+    List<String> sentence9 = new ArrayList<>();
+    List<String> sentence10 = new ArrayList<>();
+    List<String> sentence11 = new ArrayList<>();
+    List<String> sentence12 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DatabaseReference reff = FirebaseDatabase.getInstance().getReference().child("sentence1");
+
+        DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("sentence2");
+
+        DatabaseReference reff3 = FirebaseDatabase.getInstance().getReference().child("sentence3");
+
+        DatabaseReference reff4 = FirebaseDatabase.getInstance().getReference().child("sentence4");
+
+        DatabaseReference reff5 = FirebaseDatabase.getInstance().getReference().child("sentence5");
+
+        DatabaseReference reff6 = FirebaseDatabase.getInstance().getReference().child("sentence6");
+
+        DatabaseReference reff7 = FirebaseDatabase.getInstance().getReference().child("sentence7");
+
+        DatabaseReference reff8 = FirebaseDatabase.getInstance().getReference().child("sentence8");
+
+        DatabaseReference reff9 = FirebaseDatabase.getInstance().getReference().child("sentence9");
+
+        DatabaseReference reff10 = FirebaseDatabase.getInstance().getReference().child("sentence10");
+
+        DatabaseReference reff11 = FirebaseDatabase.getInstance().getReference().child("sentence11");
+
+        DatabaseReference reff12 = FirebaseDatabase.getInstance().getReference().child("sentence12");
+
+        reff.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                sentence1.add(word1);
+                sentence1.add(word2);
+                sentence1.add(word3);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reff2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                sentence2.add(word1);
+                sentence2.add(word2);
+                sentence2.add(word3);
+                shuffle();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reff3.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                sentence3.add(word1);
+                sentence3.add(word2);
+                sentence3.add(word3);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reff4.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                word4 = snapshot.child("word4").getValue().toString();
+                sentence4.add(word1);
+                sentence4.add(word2);
+                sentence4.add(word3);
+                sentence4.add(word4);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reff5.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                word4 = snapshot.child("word4").getValue().toString();
+                sentence5.add(word1);
+                sentence5.add(word2);
+                sentence5.add(word3);
+                sentence5.add(word4);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reff6.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                word4 = snapshot.child("word4").getValue().toString();
+                sentence6.add(word1);
+                sentence6.add(word2);
+                sentence6.add(word3);
+                sentence6.add(word4);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reff7.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                word4 = snapshot.child("word4").getValue().toString();
+                word5 = snapshot.child("word5").getValue().toString();
+                sentence7.add(word1);
+                sentence7.add(word2);
+                sentence7.add(word3);
+                sentence7.add(word4);
+                sentence7.add(word5);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reff8.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                word4 = snapshot.child("word4").getValue().toString();
+                word5 = snapshot.child("word5").getValue().toString();
+                sentence8.add(word1);
+                sentence8.add(word2);
+                sentence8.add(word3);
+                sentence8.add(word4);
+                sentence8.add(word5);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reff9.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                word4 = snapshot.child("word4").getValue().toString();
+                word5 = snapshot.child("word5").getValue().toString();
+                sentence9.add(word1);
+                sentence9.add(word2);
+                sentence9.add(word3);
+                sentence9.add(word4);
+                sentence9.add(word5);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reff10.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                word4 = snapshot.child("word4").getValue().toString();
+                word5 = snapshot.child("word5").getValue().toString();
+                word6 = snapshot.child("word6").getValue().toString();
+                sentence10.add(word1);
+                sentence10.add(word2);
+                sentence10.add(word3);
+                sentence10.add(word4);
+                sentence10.add(word5);
+                sentence10.add(word6);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reff11.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                word4 = snapshot.child("word4").getValue().toString();
+                word5 = snapshot.child("word5").getValue().toString();
+                word6 = snapshot.child("word6").getValue().toString();
+                sentence11.add(word1);
+                sentence11.add(word2);
+                sentence11.add(word3);
+                sentence11.add(word4);
+                sentence11.add(word5);
+                sentence11.add(word6);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reff12.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                word1 = snapshot.child("word1").getValue().toString();
+                word2 = snapshot.child("word2").getValue().toString();
+                word3 = snapshot.child("word3").getValue().toString();
+                word4 = snapshot.child("word4").getValue().toString();
+                word5 = snapshot.child("word5").getValue().toString();
+                word6 = snapshot.child("word6").getValue().toString();
+                sentence12.add(word1);
+                sentence12.add(word2);
+                sentence12.add(word3);
+                sentence12.add(word4);
+                sentence12.add(word5);
+                sentence12.add(word6);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
@@ -69,8 +335,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button button4 = findViewById(R.id.button4);
         Button button5 = findViewById(R.id.button5);
         Button button6 = findViewById(R.id.button6);
-        Button button7 = findViewById(R.id.button7);
-        Button button8 = findViewById(R.id.button8);
+        final Button button7 = findViewById(R.id.button7);
+        final Button button8 = findViewById(R.id.button8);
 
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
@@ -84,14 +350,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView textView1 = findViewById(R.id.textView);
         textView1.setText("");
 
-        shuffle(); //calling shuffle method
+        button1.setVisibility(View.INVISIBLE);
+        button2.setVisibility(View.INVISIBLE);
+        button3.setVisibility(View.INVISIBLE);
         button4.setVisibility(View.INVISIBLE);
         button5.setVisibility(View.INVISIBLE);
         button6.setVisibility(View.INVISIBLE);
+        button7.setEnabled(false);
+        button8.setEnabled(false);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                button7.setEnabled(true);
+                button8.setEnabled(true);
+                shuffle(); //calling shuffle method
+            }
+        }, 5000);   //5 seconds
 
     }
 
-    public void shuffle() {
+    public void shuffler(List<String> sentence){
         Button btn = findViewById(R.id.button1);
         Button btn2 = findViewById(R.id.button2);
         Button btn3 = findViewById(R.id.button3);
@@ -99,124 +378,76 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btn5 = findViewById(R.id.button5);
         Button btn6 = findViewById(R.id.button6);
 
-        if (testNumber == 1) {
-            List<String> shuffleList = Arrays.asList(sentence1);
-            Collections.shuffle(shuffleList);
+        List<String> shuffleList = new ArrayList<>();
+        shuffleList.addAll(sentence);
+        Collections.shuffle(shuffleList);
+
+        if(sentence.size() == 1){
+            btn.setVisibility(View.VISIBLE);
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn6.setVisibility(View.INVISIBLE);
+
+            btn.setText(shuffleList.get(0));
+        }
+        else if(sentence.size() == 2){
+            btn.setVisibility(View.VISIBLE);
+            btn2.setVisibility(View.VISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn6.setVisibility(View.INVISIBLE);
+
+            btn.setText(shuffleList.get(0));
+            btn2.setText(shuffleList.get(1));
+        }
+        else if(sentence.size() == 3){
+            btn.setVisibility(View.VISIBLE);
+            btn2.setVisibility(View.VISIBLE);
+            btn3.setVisibility(View.VISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn6.setVisibility(View.INVISIBLE);
+
             btn.setText(shuffleList.get(0));
             btn2.setText(shuffleList.get(1));
             btn3.setText(shuffleList.get(2));
-            btn4.setText("");
-            btn5.setText("");
-            btn6.setText("");
-            correctAnswer = correctAnswer1;
         }
-
-        else if (testNumber == 2) {
-            List<String> shuffleList = Arrays.asList(sentence2);
-            Collections.shuffle(shuffleList);
-            btn.setText(shuffleList.get(0));
-            btn2.setText(shuffleList.get(1));
-            btn3.setText(shuffleList.get(2));
-            btn4.setText("");
-            btn5.setText("");
-            btn6.setText("");
-            correctAnswer = correctAnswer2;
-        }
-
-        else if (testNumber == 3) {
-            List<String> shuffleList = Arrays.asList(sentence3);
-            Collections.shuffle(shuffleList);
-            btn.setText(shuffleList.get(0));
-            btn2.setText(shuffleList.get(1));
-            btn3.setText(shuffleList.get(2));
-            btn4.setText("");
-            btn5.setText("");
-            btn6.setText("");
-            correctAnswer = correctAnswer3;
-        }
-
-        else if (testNumber == 4) {
-            List<String> shuffleList = Arrays.asList(sentence4);
-            Collections.shuffle(shuffleList);
-
+        else if(sentence.size() == 4){
+            btn.setVisibility(View.VISIBLE);
+            btn2.setVisibility(View.VISIBLE);
+            btn3.setVisibility(View.VISIBLE);
             btn4.setVisibility(View.VISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn6.setVisibility(View.INVISIBLE);
 
             btn.setText(shuffleList.get(0));
             btn2.setText(shuffleList.get(1));
             btn3.setText(shuffleList.get(2));
             btn4.setText(shuffleList.get(3));
-            btn5.setText("");
-            btn6.setText("");
-            correctAnswer = correctAnswer4;
         }
-
-        else if (testNumber == 5) {
-            List<String> shuffleList = Arrays.asList(sentence5);
-            Collections.shuffle(shuffleList);
-            btn.setText(shuffleList.get(0));
-            btn2.setText(shuffleList.get(1));
-            btn3.setText(shuffleList.get(2));
-            btn4.setText(shuffleList.get(3));
-            btn5.setText("");
-            btn6.setText("");
-            correctAnswer = correctAnswer5;
-        }
-
-        else if (testNumber == 6) {
-            List<String> shuffleList = Arrays.asList(sentence6);
-            Collections.shuffle(shuffleList);
-            btn.setText(shuffleList.get(0));
-            btn2.setText(shuffleList.get(1));
-            btn3.setText(shuffleList.get(2));
-            btn4.setText(shuffleList.get(3));
-            btn5.setText("");
-            btn6.setText("");
-            correctAnswer = correctAnswer6;
-        }
-
-        else if (testNumber == 7) {
-            List<String> shuffleList = Arrays.asList(sentence7);
-            Collections.shuffle(shuffleList);
-
+        else if(sentence.size() == 5){
+            btn.setVisibility(View.VISIBLE);
+            btn2.setVisibility(View.VISIBLE);
+            btn3.setVisibility(View.VISIBLE);
+            btn4.setVisibility(View.VISIBLE);
             btn5.setVisibility(View.VISIBLE);
+            btn6.setVisibility(View.INVISIBLE);
 
             btn.setText(shuffleList.get(0));
             btn2.setText(shuffleList.get(1));
             btn3.setText(shuffleList.get(2));
             btn4.setText(shuffleList.get(3));
             btn5.setText(shuffleList.get(4));
-            btn6.setText("");
-            correctAnswer = correctAnswer7;
         }
-
-        else if (testNumber == 8) {
-            List<String> shuffleList = Arrays.asList(sentence8);
-            Collections.shuffle(shuffleList);
-            btn.setText(shuffleList.get(0));
-            btn2.setText(shuffleList.get(1));
-            btn3.setText(shuffleList.get(2));
-            btn4.setText(shuffleList.get(3));
-            btn5.setText(shuffleList.get(4));
-            btn6.setText("");
-            correctAnswer = correctAnswer8;
-        }
-
-        else if (testNumber == 9) {
-            List<String> shuffleList = Arrays.asList(sentence9);
-            Collections.shuffle(shuffleList);
-            btn.setText(shuffleList.get(0));
-            btn2.setText(shuffleList.get(1));
-            btn3.setText(shuffleList.get(2));
-            btn4.setText(shuffleList.get(3));
-            btn5.setText(shuffleList.get(4));
-            btn6.setText("");
-            correctAnswer = correctAnswer9;
-        }
-
-        else if (testNumber == 10) {
-            List<String> shuffleList = Arrays.asList(sentence10);
-            Collections.shuffle(shuffleList);
-
+        else if(sentence.size() == 6){
+            btn.setVisibility(View.VISIBLE);
+            btn2.setVisibility(View.VISIBLE);
+            btn3.setVisibility(View.VISIBLE);
+            btn4.setVisibility(View.VISIBLE);
+            btn5.setVisibility(View.VISIBLE);
             btn6.setVisibility(View.VISIBLE);
 
             btn.setText(shuffleList.get(0));
@@ -225,31 +456,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btn4.setText(shuffleList.get(3));
             btn5.setText(shuffleList.get(4));
             btn6.setText(shuffleList.get(5));
-            correctAnswer = correctAnswer10;
+        }
+        else {
+            //placeholder
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (String s : sentence)
+        {
+            sb.append(s);
+            sb.append(" ");
+        }
+        correctAnswer = sb.toString().trim();
+    }
+
+    public void shuffle() {
+        if (testNumber == 1) {
+            shuffler(sentence1);
+        }
+
+        else if (testNumber == 2) {
+            shuffler(sentence2);
+        }
+
+        else if (testNumber == 3) {
+            shuffler(sentence3);
+        }
+
+        else if (testNumber == 4) {
+            shuffler(sentence4);
+        }
+
+        else if (testNumber == 5) {
+            shuffler(sentence5);
+        }
+
+        else if (testNumber == 6) {
+            shuffler(sentence6);
+        }
+
+        else if (testNumber == 7) {
+            shuffler(sentence7);
+        }
+
+        else if (testNumber == 8) {
+            shuffler(sentence8);
+        }
+
+        else if (testNumber == 9) {
+            shuffler(sentence9);
+        }
+
+        else if (testNumber == 10) {
+            shuffler(sentence10);
         }
 
         else if (testNumber == 11) {
-            List<String> shuffleList = Arrays.asList(sentence11);
-            Collections.shuffle(shuffleList);
-            btn.setText(shuffleList.get(0));
-            btn2.setText(shuffleList.get(1));
-            btn3.setText(shuffleList.get(2));
-            btn4.setText(shuffleList.get(3));
-            btn5.setText(shuffleList.get(4));
-            btn6.setText(shuffleList.get(5));
-            correctAnswer = correctAnswer11;
+            shuffler(sentence11);
         }
 
         else if (testNumber == 12) {
-            List<String> shuffleList = Arrays.asList(sentence12);
-            Collections.shuffle(shuffleList);
-            btn.setText(shuffleList.get(0));
-            btn2.setText(shuffleList.get(1));
-            btn3.setText(shuffleList.get(2));
-            btn4.setText(shuffleList.get(3));
-            btn5.setText(shuffleList.get(4));
-            btn6.setText(shuffleList.get(5));
-            correctAnswer = correctAnswer12;
+            shuffler(sentence12);
         }
         else
         {

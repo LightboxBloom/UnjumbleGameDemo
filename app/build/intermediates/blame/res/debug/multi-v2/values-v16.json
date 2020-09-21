@@ -4,17 +4,7 @@
             "outputFile": "C:\\Users\\Donovan\\Desktop\\UnjumbleDemo_Git\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Donovan\\.gradle\\caches\\transforms-2\\files-2.1\\c98024bd6086dde2720bfd2ef053a1a0\\core-1.0.1\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Donovan\\.gradle\\caches\\transforms-2\\files-2.1\\91c13ba142ac143678fc72b7e53d0de0\\appcompat-1.0.2\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Donovan\\.gradle\\caches\\transforms-2\\files-2.1\\d94fef5eb91aaeae91b7c94568d8f49f\\appcompat-1.0.2\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -30,6 +20,16 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Donovan\\.gradle\\caches\\transforms-2\\files-2.1\\55636d9b4f906edf87974bff338c246b\\core-1.0.1\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
                     }
                 }
             ]

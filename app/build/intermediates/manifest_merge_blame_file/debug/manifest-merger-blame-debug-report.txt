@@ -10,48 +10,102 @@
 9        android:targetSdkVersion="29" />
 9-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml
 10
-11    <application
-11-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:5:5-24:19
-12        android:allowBackup="true"
-12-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:6:9-35
-13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-13-->[androidx.core:core:1.0.1] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\c98024bd6086dde2720bfd2ef053a1a0\core-1.0.1\AndroidManifest.xml:22:18-86
-14        android:debuggable="true"
-15        android:icon="@mipmap/ic_launcher"
-15-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:7:9-43
-16        android:label="@string/app_name"
-16-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:8:9-41
-17        android:roundIcon="@mipmap/ic_launcher_round"
-17-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:9:9-54
-18        android:supportsRtl="true"
-18-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:10:9-35
-19        android:testOnly="true"
-20        android:theme="@style/AppTheme" >
-20-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:11:9-40
-21        <activity
-21-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:12:9-20:20
-22            android:name="com.example.unjumblegamedemo.MainActivity"
-22-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:13:13-41
-23            android:screenOrientation="nosensor" >
-23-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:14:13-49
-24            <intent-filter>
-24-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:15:13-19:29
-25                <action android:name="android.intent.action.MAIN" />
-25-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:16:17-69
-25-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:16:25-66
-26
-27                <category android:name="android.intent.category.LAUNCHER" />
-27-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:18:17-77
-27-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:18:27-74
-28            </intent-filter>
-29        </activity>
-30
-31        <meta-data
-31-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:21:9-23:57
-32            android:name="preloaded_fonts"
-32-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:22:13-43
-33            android:resource="@array/preloaded_fonts" />
-33-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:23:13-54
-34    </application>
+11    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+12    <!-- <uses-sdk android:minSdkVersion="14"/> -->
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->[com.google.firebase:firebase-database:19.4.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\f759ba9f6a5ba4949651c79240677eaa\jetified-firebase-database-19.4.0\AndroidManifest.xml:25:5-79
+13-->[com.google.firebase:firebase-database:19.4.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\f759ba9f6a5ba4949651c79240677eaa\jetified-firebase-database-19.4.0\AndroidManifest.xml:25:22-76
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->[com.google.firebase:firebase-database:19.4.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\f759ba9f6a5ba4949651c79240677eaa\jetified-firebase-database-19.4.0\AndroidManifest.xml:26:5-67
+14-->[com.google.firebase:firebase-database:19.4.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\f759ba9f6a5ba4949651c79240677eaa\jetified-firebase-database-19.4.0\AndroidManifest.xml:26:22-64
+15
+16    <application
+16-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:5:5-24:19
+17        android:allowBackup="true"
+17-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:6:9-35
+18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+18-->[androidx.core:core:1.0.1] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\55636d9b4f906edf87974bff338c246b\core-1.0.1\AndroidManifest.xml:22:18-86
+19        android:debuggable="true"
+20        android:icon="@mipmap/ic_launcher"
+20-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:7:9-43
+21        android:label="@string/app_name"
+21-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:8:9-41
+22        android:roundIcon="@mipmap/ic_launcher_round"
+22-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:9:9-54
+23        android:supportsRtl="true"
+23-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:10:9-35
+24        android:testOnly="true"
+25        android:theme="@style/AppTheme" >
+25-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:11:9-40
+26        <activity
+26-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:12:9-20:20
+27            android:name="com.example.unjumblegamedemo.MainActivity"
+27-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:13:13-41
+28            android:screenOrientation="nosensor" >
+28-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:14:13-49
+29            <intent-filter>
+29-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:15:13-19:29
+30                <action android:name="android.intent.action.MAIN" />
+30-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:16:17-69
+30-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:16:25-66
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:18:17-77
+32-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:18:27-74
+33            </intent-filter>
+34        </activity>
 35
-36</manifest>
+36        <meta-data
+36-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:21:9-23:57
+37            android:name="preloaded_fonts"
+37-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:22:13-43
+38            android:resource="@array/preloaded_fonts" />
+38-->C:\Users\Donovan\Desktop\UnjumbleDemo_Git\app\src\main\AndroidManifest.xml:23:13-54
+39
+40        <service
+40-->[com.google.firebase:firebase-database:19.4.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\f759ba9f6a5ba4949651c79240677eaa\jetified-firebase-database-19.4.0\AndroidManifest.xml:29:9-35:19
+41            android:name="com.google.firebase.components.ComponentDiscoveryService"
+41-->[com.google.firebase:firebase-database:19.4.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\f759ba9f6a5ba4949651c79240677eaa\jetified-firebase-database-19.4.0\AndroidManifest.xml:30:13-84
+42            android:directBootAware="true"
+42-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\b53108ec39d9732359576999f06f4ec9\jetified-firebase-common-19.3.1\AndroidManifest.xml:35:13-43
+43            android:exported="false" >
+43-->[com.google.firebase:firebase-database:19.4.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\f759ba9f6a5ba4949651c79240677eaa\jetified-firebase-database-19.4.0\AndroidManifest.xml:31:13-37
+44            <meta-data
+44-->[com.google.firebase:firebase-database:19.4.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\f759ba9f6a5ba4949651c79240677eaa\jetified-firebase-database-19.4.0\AndroidManifest.xml:32:13-34:85
+45                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+45-->[com.google.firebase:firebase-database:19.4.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\f759ba9f6a5ba4949651c79240677eaa\jetified-firebase-database-19.4.0\AndroidManifest.xml:33:17-109
+46                android:value="com.google.firebase.components.ComponentRegistrar" />
+46-->[com.google.firebase:firebase-database:19.4.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\f759ba9f6a5ba4949651c79240677eaa\jetified-firebase-database-19.4.0\AndroidManifest.xml:34:17-82
+47        </service>
+48
+49        <activity
+49-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\7f1c05604811b5d8b0b39e85e23d9427\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+50            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+50-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\7f1c05604811b5d8b0b39e85e23d9427\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+51            android:exported="false"
+51-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\7f1c05604811b5d8b0b39e85e23d9427\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+52            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+52-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\7f1c05604811b5d8b0b39e85e23d9427\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+53
+54        <provider
+54-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\b53108ec39d9732359576999f06f4ec9\jetified-firebase-common-19.3.1\AndroidManifest.xml:26:9-31:39
+55            android:name="com.google.firebase.provider.FirebaseInitProvider"
+55-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\b53108ec39d9732359576999f06f4ec9\jetified-firebase-common-19.3.1\AndroidManifest.xml:27:13-77
+56            android:authorities="com.example.unjumblegamedemo.firebaseinitprovider"
+56-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\b53108ec39d9732359576999f06f4ec9\jetified-firebase-common-19.3.1\AndroidManifest.xml:28:13-72
+57            android:directBootAware="true"
+57-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\b53108ec39d9732359576999f06f4ec9\jetified-firebase-common-19.3.1\AndroidManifest.xml:29:13-43
+58            android:exported="false"
+58-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\b53108ec39d9732359576999f06f4ec9\jetified-firebase-common-19.3.1\AndroidManifest.xml:30:13-37
+59            android:initOrder="100" />
+59-->[com.google.firebase:firebase-common:19.3.1] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\b53108ec39d9732359576999f06f4ec9\jetified-firebase-common-19.3.1\AndroidManifest.xml:31:13-36
+60
+61        <meta-data
+61-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\aa0b0b1b8ee658361451379d95ea2969\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+62            android:name="com.google.android.gms.version"
+62-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\aa0b0b1b8ee658361451379d95ea2969\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+63            android:value="@integer/google_play_services_version" />
+63-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Donovan\.gradle\caches\transforms-2\files-2.1\aa0b0b1b8ee658361451379d95ea2969\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+64    </application>
+65
+66</manifest>
