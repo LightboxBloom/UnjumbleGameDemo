@@ -18,7 +18,40 @@ public class FirebaseHandler {
 
     public static DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("sentences");
 
+    public static DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("userTest");
+
+    public static void getSetUserLevel(){
+
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(MainActivity.testNumber == -100) { //get user's level from database
+                    MainActivity.testNumber = Integer.parseInt(String.valueOf(snapshot.child("userLevel").getValue()));
+                    FirebaseData();
+                }
+                else if (MainActivity.testNumber > FirebaseHandler.counter.getCount()) { //Indicates that all levels are completed
+                    MainActivity.shuffle(Sentence.sentenceArray[MainActivity.testNumber - 2]);
+                    MainActivity.hideButtons();
+                    MainActivity.buttons[7].setEnabled(true);
+                    userRef.child("userLevel").setValue(MainActivity.testNumber);
+                    MainActivity.textViews[0].setText("Well Done!");
+                    MainActivity.textViews[1].setText("All levels completed!");
+                }
+                else { //change user's level in database
+                    userRef.child("userLevel").setValue(MainActivity.testNumber);
+                    MainActivity.textViews[1].setText("Current Level: " + MainActivity.testNumber); //displays user's current level
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     public static void FirebaseData() {
+
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -40,15 +73,19 @@ public class FirebaseHandler {
 
                     //shuffle happens after sentences have words to avoid crashing,
                     //submit and restart buttons are only enabled once the firebase data has been pulled (this stops the user from skipping levels before the data loads)
-                    MainActivity.shuffle(Sentence.sentenceArray[0]);
-                    MainActivity.buttons[6].setEnabled(true);
-                    MainActivity.buttons[7].setEnabled(true);
+                    if (MainActivity.testNumber <= FirebaseHandler.counter.getCount()) {
+                        MainActivity.shuffle(Sentence.sentenceArray[MainActivity.testNumber - 1]);
+                        MainActivity.buttons[6].setEnabled(true);
+                        MainActivity.buttons[7].setEnabled(true);
+                    }
+                    else {
+                        getSetUserLevel();
+                    }
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
     }
 }
