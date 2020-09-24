@@ -1,5 +1,6 @@
 package com.example.unjumblegamedemo;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -14,22 +15,21 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static String correctAnswer;
-
-    public static String userAnswer = "";
-
-    public static int testNumber = 1;
-
-    public static Button[] buttons = new Button[8];
-
+    public static String correctAnswer; //Used to store the answer that the user must give to proceed to the next level
+    public static String userAnswer = ""; //Used to track what the answer the user is giving
+    public static int testNumber = 1; //Used to track the level that the user is on
+    public static Button[] buttons = new Button[8]; //Button array used to initialize all buttons
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //initializing buttons
-        for(int i=0; i<buttons.length; i++) {
+        FirebaseHandler.FirebaseData();            //retrieves data from db
+
+
+        for(int i=0; i<buttons.length; i++)        //initializing buttons
+        {
             String buttonID = "button" + (i+1);
 
             int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
@@ -37,9 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             buttons[i].setOnClickListener(this);
             buttons[i].setVisibility(View.INVISIBLE);
         }
+
+        //Submit and Restart buttons are set to visible
         buttons[6].setVisibility(View.VISIBLE);
         buttons[7].setVisibility(View.VISIBLE);
 
+        //TextView initialized
         TextView textView1 = findViewById(R.id.textView);
         textView1.setText("");
 
@@ -47,25 +50,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttons[6].setEnabled(false);
         buttons[7].setEnabled(false);
 
-        Sentence.sentences.clear();
-        FirebaseHandler.FirebaseData(); //pulls the game's sentences from the Firebase Database
     }
 
-    public static void shuffle(){
+    //Handles the shuffling of sentences so that the word order is random
+    public static void shuffle(List<String> sentences){
 
-        List<String> shuffleList = new ArrayList<>(Sentence.sentences);
+        List<String> shuffleList = new ArrayList<>(sentences);
         Collections.shuffle(shuffleList);
 
-        if(Sentence.sentences.size() == 1){
+        //These loops handle which buttons must be visible and active depending on how long a sentence is
+        //These loops also handle which words are assigned to which buttons
+        if(sentences.size() == 1){
             for(int i=1; i<buttons.length - 2; i++) {
                 {
                     buttons[i].setVisibility(View.INVISIBLE);
                 }
             }
             buttons[0].setVisibility(View.VISIBLE);
+            buttons[0].setEnabled(true);
             buttons[0].setText(shuffleList.get(0));
         }
-        else if(Sentence.sentences.size() == 2){
+        else if(sentences.size() == 2){
             for(int i=2; i<buttons.length - 2; i++) {
                 {
                     buttons[i].setVisibility(View.INVISIBLE);
@@ -74,11 +79,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for(int i=0; i<2; i++) {
                 {
                     buttons[i].setVisibility(View.VISIBLE);
+                    buttons[i].setEnabled(true);
                     buttons[i].setText(shuffleList.get(i));
                 }
             }
         }
-        else if(Sentence.sentences.size() == 3){
+        else if(sentences.size() == 3){
             for(int i=3; i<buttons.length - 2; i++) {
                 {
                     buttons[i].setVisibility(View.INVISIBLE);
@@ -87,11 +93,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for(int i=0; i<3; i++) {
                 {
                     buttons[i].setVisibility(View.VISIBLE);
+                    buttons[i].setEnabled(true);
                     buttons[i].setText(shuffleList.get(i));
                 }
             }
         }
-        else if(Sentence.sentences.size() == 4){
+        else if(sentences.size() == 4){
             for(int i=4; i<buttons.length - 2; i++) {
                 {
                     buttons[i].setVisibility(View.INVISIBLE);
@@ -100,30 +107,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for(int i=0; i<4; i++) {
                 {
                     buttons[i].setVisibility(View.VISIBLE);
+                    buttons[i].setEnabled(true);
                     buttons[i].setText(shuffleList.get(i));
                 }
             }
         }
-        else if(Sentence.sentences.size() == 5){
+        else if(sentences.size() == 5){
             for(int i=0; i<5; i++) {
                 {
                     buttons[i].setVisibility(View.VISIBLE);
+                    buttons[i].setEnabled(true);
                     buttons[i].setText(shuffleList.get(i));
                 }
             }
             buttons[5].setVisibility(View.INVISIBLE);
         }
-        else if(Sentence.sentences.size() == 6) {
+        else if(sentences.size() == 6) {
             for (int i = 0; i < buttons.length - 2; i++) {
                 {
                     buttons[i].setVisibility(View.VISIBLE);
+                    buttons[i].setEnabled(true);
                     buttons[i].setText(shuffleList.get(i));
                 }
             }
         }
 
+        //Used to set the value for the correct answer by creating a string using all the words from a sentence
         StringBuilder sb = new StringBuilder();
-        for (String s : Sentence.sentences)
+        for (String s : sentences)
         {
             sb.append(s);
             sb.append(" ");
@@ -131,12 +142,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         correctAnswer = sb.toString().trim();
     }
 
+    //method for enabling the buttons that hold words (used when restarting a level or loading a new one)
     public static void enableButtons(){
         for(int i=0; i<buttons.length - 2; i++) {
             buttons[i].setEnabled(true);
         }
     }
 
+    //All word buttons are set to 'Not Clicked' by default
     boolean clicked1=false;
     boolean clicked2=false;
     boolean clicked3=false;
@@ -144,7 +157,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean clicked5=false;
     boolean clicked6=false;
 
-    public void clickedButtons(){
+    //This means that all the clickable word buttons are set to 'Not Clicked'
+    //This is used for giving user correct error feedback
+    public void unclickButtons(){
         clicked1=false;
         clicked2=false;
         clicked3=false;
@@ -159,12 +174,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView textView1 = findViewById(R.id.textView);
         switch (v.getId()) {
             case R.id.button1:
-                buttons[0].setEnabled(false);
+                buttons[0].setEnabled(false); //button is made unclickable so the user cannot use the same word twice
 
-                userAnswer = userAnswer + " " + buttons[0].getText().toString();
-                textView1.setText(userAnswer);
+                userAnswer = userAnswer + " " + buttons[0].getText().toString(); //the word the user selects is added to their answer
+                textView1.setText(userAnswer); //user's current answer is displayed in the textview
 
-                clicked1=true;
+                clicked1=true; //button is set to 'Clicked'
                 break;
 
             case R.id.button2:
@@ -215,22 +230,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
 
-            case R.id.button7:
+            case R.id.button7: //submit button
 
                 if (userAnswer.contains(correctAnswer)) { //handles event when the user gives correct answer
                     testNumber = testNumber + 1;
-                    Sentence.sentences.clear();
-                    FirebaseHandler.FirebaseData();
 
-                    if (testNumber > 12) {
+                    if (testNumber > FirebaseHandler.counter.getCount()) {
                         Toast.makeText(this, "All Levels Complete! Congratulations!", Toast.LENGTH_SHORT).show();
                         buttons[7].setEnabled(false);
                         buttons[6].setEnabled(false);
                     } else {
                         Toast.makeText(this, "Level Complete! Try this next Level", Toast.LENGTH_SHORT).show();
-                        shuffle();
+                        shuffle(Sentence.sentenceArray[testNumber - 1]);
 
-                        clickedButtons();
+                        unclickButtons();
 
                         userAnswer = "";
                         textView1.setText(userAnswer);
@@ -238,7 +251,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 } else {            //handles event when the user gives incorrect answer
-                    if(Sentence.sentences.size()<=1){
+                    //Different error messages are given based on whether the user didn't use all available words or if they just gave the wrong answer but did use all available words
+                    if(Sentence.sentenceArray[testNumber - 1].size()<=1){
                         if(!clicked1 || !clicked2 || !clicked3){
                             Toast.makeText(this, "Incorrect answer! Use all available words before using the submit button!", Toast.LENGTH_SHORT).show();
                         }
@@ -246,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(this, "Incorrect answer! Click RESTART to try this level again.", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    else if(Sentence.sentences.size()<=2){
+                    else if(Sentence.sentenceArray[testNumber - 1].size()<=2){
                         if(!clicked1 || !clicked2 || !clicked3){
                             Toast.makeText(this, "Incorrect answer! Use all available words before using the submit button!", Toast.LENGTH_SHORT).show();
                         }
@@ -254,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(this, "Incorrect answer! Click RESTART to try this level again.", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    else if(Sentence.sentences.size()<=3){
+                    else if(Sentence.sentenceArray[testNumber - 1].size()<=3){
                         if(!clicked1 || !clicked2 || !clicked3){
                             Toast.makeText(this, "Incorrect answer! Use all available words before using the submit button!", Toast.LENGTH_SHORT).show();
                         }
@@ -262,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(this, "Incorrect answer! Click RESTART to try this level again.", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    else if(Sentence.sentences.size()<=4){
+                    else if(Sentence.sentenceArray[testNumber - 1].size()<=4){
                         if(!clicked1 || !clicked2 || !clicked3 || !clicked4){
                             Toast.makeText(this, "Incorrect answer! Use all available words before using the submit button!", Toast.LENGTH_SHORT).show();
                         }
@@ -270,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(this, "Incorrect answer! Click RESTART to try this level again.", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    else if(Sentence.sentences.size()<=5){
+                    else if(Sentence.sentenceArray[testNumber - 1].size()<=5){
                         if(!clicked1 || !clicked2 || !clicked3 || !clicked4 || !clicked5){
                             Toast.makeText(this, "Incorrect answer! Use all available words before using the submit button!", Toast.LENGTH_SHORT).show();
                         }
@@ -278,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(this, "Incorrect answer! Click RESTART to try this level again.", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    else if(Sentence.sentences.size()<=6) {
+                    else if(Sentence.sentenceArray[testNumber - 1].size()<=6) {
                         {
                             if (!clicked1 || !clicked2 || !clicked3 || !clicked4 || !clicked5 || !clicked6) {
                                 Toast.makeText(this, "Incorrect answer! Use all available words before using the submit button!", Toast.LENGTH_SHORT).show();
@@ -290,14 +304,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
 
-            case R.id.button8:
+            case R.id.button8: //Restart Button
                 Toast.makeText(this, "Level Restarted", Toast.LENGTH_SHORT).show();
-                userAnswer = "";
-                textView1.setText(userAnswer);
+                userAnswer = ""; //user answer reset
+                textView1.setText(userAnswer); //reset user answer is displayed to user
 
-                clickedButtons();
-                shuffle();
-                enableButtons();
+                unclickButtons(); //buttons are set to 'Not Clicked'
+                shuffle(Sentence.sentenceArray[testNumber - 1]); //words are shuffled
+                enableButtons(); //buttons are enabled
                 break;
         }
     }
