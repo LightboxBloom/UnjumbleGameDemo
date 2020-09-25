@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static String correctAnswer; //Used to store the answer that the user must give to proceed to the next level
     public static String userAnswer = ""; //Used to track what the answer the user is giving
-    public static int testNumber = -100; //Used to track the level that the user is on
+    public static int testNumber = -100; //Used to track the level that the user is on, initialized at -100 to trigger database retrieval
     public static Button[] buttons = new Button[8]; //Button array used to initialize all buttons
     public static TextView[] textViews = new TextView[2]; //Button array used to initialize all buttons
 
@@ -28,10 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true); //Firebase functionality works when offline
+
         FirebaseHandler.getSetUserLevel();
-
-
-        //FirebaseHandler.FirebaseData();            //retrieves data from db
 
         for(int i=0; i<buttons.length; i++)        //initializing buttons
         {
@@ -331,6 +332,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (testNumber > FirebaseHandler.counter.getCount()) {
                     testNumber = 1;
                     shuffle(Sentence.sentenceArray[testNumber - 1]);
+                    buttons[6].setEnabled(true);
                 }
                 //resets the current user level
                 else {

@@ -20,6 +20,7 @@ public class FirebaseHandler {
 
     public static DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("userTest");
 
+
     public static void getSetUserLevel(){
 
         userRef.addValueEventListener(new ValueEventListener() {
