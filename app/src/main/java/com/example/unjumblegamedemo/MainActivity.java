@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseApp.initializeApp(this);
+        //FirebaseApp.initializeApp(this);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true); //Firebase functionality works when offline, online is required for first launch to retrieve data
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true); //Firebase functionality works when offline, online is required for first launch to retrieve data
 
         FirebaseHandler.getSetUserLevel();
 
@@ -336,6 +336,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     testNumber = 1;
                     shuffle(Sentence.sentenceArray[testNumber - 1]);
                     buttons[6].setEnabled(true);
+                    userAnswer = "";
+                    textViews[0].setText(userAnswer);
                 }
                 //resets the current user level
                 else {
