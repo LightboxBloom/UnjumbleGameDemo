@@ -18,7 +18,9 @@ public class FirebaseHandler {
 
     public static Sentence counter = new Sentence();//used to create an array of sentences that is the correct size
 
-    public static DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("sentences");
+    //public static DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("sentences");
+
+    public static DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Flashcards").child("Uploads");
 
     public static DatabaseReference userTestRef = FirebaseDatabase.getInstance().getReference().child("userTest");
 
@@ -28,7 +30,9 @@ public class FirebaseHandler {
 
     public static FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-    public static String userKey = ""; /*currentUser.getUid();*/
+    //UNCOMMENT currentUser.getUid WHEN INTEGRATED IN FULL APPLICATION, THEN COMMENT OUT OR REMOVE userKey = ""
+    public static String userKey = "";
+    //public static String userKey = currentUser.getUid();
 
     public static void getSetUserLevel(){
 
@@ -85,6 +89,10 @@ public class FirebaseHandler {
         }
     }
 
+
+    //CHANGE FIREBASE DATA, USE NEW DB REFERENCE FOR THE FLASHCARDS AND RETRIEVE ALL CHILD SENTENCES FROM THE CHILD OF UPLOADS
+
+
     public static void FirebaseData() {
 
 
@@ -96,7 +104,7 @@ public class FirebaseHandler {
                 Sentence.arrayCreate(counter.getCount()); //arrayCreate method is called
                 int i = -1; //used for loop to assign word into different sentence lists
 
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) { //after a sentence's words are assigned, the next sentence is filled
+                /*for (DataSnapshot dataSnapshot : snapshot.getChildren()) { //after a sentence's words are assigned, the next sentence is filled
                     i++;
                     for (DataSnapshot child : dataSnapshot.getChildren())  //each word in the database is added to a list
                     {
@@ -104,7 +112,16 @@ public class FirebaseHandler {
                         s = Objects.requireNonNull(child.getValue()).toString();
                         Sentence.sentenceArray[i].add(s);
 
-                    }
+                    }*/
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) { //after a sentence's words are assigned, the next sentence is filled
+                        i++;
+                        String s;
+                        s = dataSnapshot.child("Sentence").getValue().toString();
+                        String[] words = s.split(" ");
+                        for (String word: words)
+                        {
+                            Sentence.sentenceArray[i].add(word);
+                        }
 
                     //shuffle happens after sentences have words to avoid crashing,
                     //submit and restart buttons are only enabled once the firebase data has been pulled (this stops the user from skipping levels before the data loads)
